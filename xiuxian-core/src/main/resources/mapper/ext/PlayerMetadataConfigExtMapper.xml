@@ -9,6 +9,6 @@
         values (#{playerId,jdbcType=BIGINT}, #{configCode,jdbcType=VARCHAR}, #{configValue,jdbcType=LONGVARCHAR}
         )
         on duplicate key update
-        set configValue = #{configValue}
+        set config_value = #{configValue}
     </insert>
 </mapper>
