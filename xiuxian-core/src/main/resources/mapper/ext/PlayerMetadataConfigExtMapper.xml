@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.game.xiuxian.core.mapper.PlayerMetadataConfigMapper">
+
+    <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.ddf.game.xiuxian.core.entity.PlayerMetadataConfig" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into player_metadata_config (player_id, config_code, config_value
+        )
+        values (#{playerId,jdbcType=BIGINT}, #{configCode,jdbcType=VARCHAR}, #{configValue,jdbcType=LONGVARCHAR}
+        )
+        on duplicate key update
+        set configValue = #{configValue}
+    </insert>
+</mapper>
