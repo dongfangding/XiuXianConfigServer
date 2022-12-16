@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.game.xiuxian.core.mapper.PlayerInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ddf.game.xiuxian.core.entity.PlayerInfo">
+    <!--@mbg.generated-->
+    <!--@Table player_info-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="register_ip" jdbcType="VARCHAR" property="registerIp" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="status" jdbcType="OTHER" property="status" />
+    <result column="latest_login_time" jdbcType="BIGINT" property="latestLoginTime" />
+    <result column="latest_token_login_time" jdbcType="BIGINT" property="latestTokenLoginTime" />
+    <result column="latest_login_ip" jdbcType="VARCHAR" property="latestLoginIp" />
+    <result column="latest_token_login_ip" jdbcType="VARCHAR" property="latestTokenLoginIp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, nickname, `password`, register_ip, email, ctime, `status`, latest_login_time, 
+    latest_token_login_time, latest_login_ip, latest_token_login_ip
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from player_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from player_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ddf.game.xiuxian.core.entity.PlayerInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into player_info (nickname, `password`, register_ip, 
+      email, ctime, `status`, 
+      latest_login_time, latest_token_login_time, latest_login_ip, 
+      latest_token_login_ip)
+    values (#{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{registerIp,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT}, #{status,jdbcType=OTHER}, 
+      #{latestLoginTime,jdbcType=BIGINT}, #{latestTokenLoginTime,jdbcType=BIGINT}, #{latestLoginIp,jdbcType=VARCHAR}, 
+      #{latestTokenLoginIp,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ddf.game.xiuxian.core.entity.PlayerInfo" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into player_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nickname != null and nickname != ''">
+        nickname,
+      </if>
+      <if test="password != null and password != ''">
+        `password`,
+      </if>
+      <if test="registerIp != null and registerIp != ''">
+        register_ip,
+      </if>
+      <if test="email != null and email != ''">
+        email,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="latestLoginTime != null">
+        latest_login_time,
+      </if>
+      <if test="latestTokenLoginTime != null">
+        latest_token_login_time,
+      </if>
+      <if test="latestLoginIp != null and latestLoginIp != ''">
+        latest_login_ip,
+      </if>
+      <if test="latestTokenLoginIp != null and latestTokenLoginIp != ''">
+        latest_token_login_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nickname != null and nickname != ''">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null and password != ''">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="registerIp != null and registerIp != ''">
+        #{registerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null and email != ''">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=OTHER},
+      </if>
+      <if test="latestLoginTime != null">
+        #{latestLoginTime,jdbcType=BIGINT},
+      </if>
+      <if test="latestTokenLoginTime != null">
+        #{latestTokenLoginTime,jdbcType=BIGINT},
+      </if>
+      <if test="latestLoginIp != null and latestLoginIp != ''">
+        #{latestLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="latestTokenLoginIp != null and latestTokenLoginIp != ''">
+        #{latestTokenLoginIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddf.game.xiuxian.core.entity.PlayerInfo">
+    <!--@mbg.generated-->
+    update player_info
+    <set>
+      <if test="nickname != null and nickname != ''">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null and password != ''">
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="registerIp != null and registerIp != ''">
+        register_ip = #{registerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null and email != ''">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=OTHER},
+      </if>
+      <if test="latestLoginTime != null">
+        latest_login_time = #{latestLoginTime,jdbcType=BIGINT},
+      </if>
+      <if test="latestTokenLoginTime != null">
+        latest_token_login_time = #{latestTokenLoginTime,jdbcType=BIGINT},
+      </if>
+      <if test="latestLoginIp != null and latestLoginIp != ''">
+        latest_login_ip = #{latestLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="latestTokenLoginIp != null and latestTokenLoginIp != ''">
+        latest_token_login_ip = #{latestTokenLoginIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddf.game.xiuxian.core.entity.PlayerInfo">
+    <!--@mbg.generated-->
+    update player_info
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      register_ip = #{registerIp,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=BIGINT},
+      `status` = #{status,jdbcType=OTHER},
+      latest_login_time = #{latestLoginTime,jdbcType=BIGINT},
+      latest_token_login_time = #{latestTokenLoginTime,jdbcType=BIGINT},
+      latest_login_ip = #{latestLoginIp,jdbcType=VARCHAR},
+      latest_token_login_ip = #{latestTokenLoginIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

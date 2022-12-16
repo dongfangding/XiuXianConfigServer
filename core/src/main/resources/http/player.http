@@ -1,0 +1,29 @@
+### 注册
+POST http://localhost:8080/xiuXian/player/registry
+Content-Type: application/json
+
+{
+  "nickname": "dingchen",
+  "password": "E10ADC3949BA59ABBE56E057F20F883E"
+}
+
+
+### 登录
+POST http://localhost:8080/xiuXian/player/login
+Content-Type: application/json
+
+{
+  "loginIdentity": "dingchen",
+  "credential": "E10ADC3949BA59ABBE56E057F20F883E"
+}
+
+### 同步账号元数据
+POST http://localhost:8080/xiuXian/player/syncAccountMetadata
+Content-Type: application/json
+Authorization: Bearer $2a$10$ClCNZ0kDMwNQjK17XZA.teXzSerD.ULBKhrGN.qyMiUb9r17ia4KG<=>efe83ec743690a1c463c6b551bbe0d09b589111380397a7a4341bbe76aba8eda103ee09daf1cc5b36c1b73060c233ed965b9ffac0588a0100576e049dad1e2c06a5978f56516c3cba388059467b6a845e7a0d2358413ae7885a124d9d299bb7a69366fefdd6a700631e87d0630ae780914cf3eb09a525aad069a78e92a2f8665592813d4fb155ee59c329f137787b7242b77eaf474151a8546d20558cd20aa4ea2f6a9d64ebd5c377f7f4c2ba98d7454
+
+
+{
+  "configValue": "test"
+}
+
