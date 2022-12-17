@@ -11,15 +11,10 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="ctime" jdbcType="BIGINT" property="ctime" />
     <result column="status" jdbcType="OTHER" property="status" />
-    <result column="latest_login_time" jdbcType="BIGINT" property="latestLoginTime" />
-    <result column="latest_token_login_time" jdbcType="BIGINT" property="latestTokenLoginTime" />
-    <result column="latest_login_ip" jdbcType="VARCHAR" property="latestLoginIp" />
-    <result column="latest_token_login_ip" jdbcType="VARCHAR" property="latestTokenLoginIp" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, nickname, `password`, register_ip, email, ctime, `status`, latest_login_time, 
-    latest_token_login_time, latest_login_ip, latest_token_login_ip
+    id, nickname, `password`, register_ip, email, ctime, `status`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -36,13 +31,9 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ddf.game.xiuxian.core.entity.PlayerInfo" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into player_info (nickname, `password`, register_ip, 
-      email, ctime, `status`, 
-      latest_login_time, latest_token_login_time, latest_login_ip, 
-      latest_token_login_ip)
+      email, ctime, `status`)
     values (#{nickname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{registerIp,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT}, #{status,jdbcType=OTHER}, 
-      #{latestLoginTime,jdbcType=BIGINT}, #{latestTokenLoginTime,jdbcType=BIGINT}, #{latestLoginIp,jdbcType=VARCHAR}, 
-      #{latestTokenLoginIp,jdbcType=VARCHAR})
+      #{email,jdbcType=VARCHAR}, #{ctime,jdbcType=BIGINT}, #{status,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ddf.game.xiuxian.core.entity.PlayerInfo" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -66,18 +57,6 @@
       <if test="status != null">
         `status`,
       </if>
-      <if test="latestLoginTime != null">
-        latest_login_time,
-      </if>
-      <if test="latestTokenLoginTime != null">
-        latest_token_login_time,
-      </if>
-      <if test="latestLoginIp != null and latestLoginIp != ''">
-        latest_login_ip,
-      </if>
-      <if test="latestTokenLoginIp != null and latestTokenLoginIp != ''">
-        latest_token_login_ip,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="nickname != null and nickname != ''">
@@ -97,18 +76,6 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=OTHER},
-      </if>
-      <if test="latestLoginTime != null">
-        #{latestLoginTime,jdbcType=BIGINT},
-      </if>
-      <if test="latestTokenLoginTime != null">
-        #{latestTokenLoginTime,jdbcType=BIGINT},
-      </if>
-      <if test="latestLoginIp != null and latestLoginIp != ''">
-        #{latestLoginIp,jdbcType=VARCHAR},
-      </if>
-      <if test="latestTokenLoginIp != null and latestTokenLoginIp != ''">
-        #{latestTokenLoginIp,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -134,18 +101,6 @@
       <if test="status != null">
         `status` = #{status,jdbcType=OTHER},
       </if>
-      <if test="latestLoginTime != null">
-        latest_login_time = #{latestLoginTime,jdbcType=BIGINT},
-      </if>
-      <if test="latestTokenLoginTime != null">
-        latest_token_login_time = #{latestTokenLoginTime,jdbcType=BIGINT},
-      </if>
-      <if test="latestLoginIp != null and latestLoginIp != ''">
-        latest_login_ip = #{latestLoginIp,jdbcType=VARCHAR},
-      </if>
-      <if test="latestTokenLoginIp != null and latestTokenLoginIp != ''">
-        latest_token_login_ip = #{latestTokenLoginIp,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -157,11 +112,7 @@
       register_ip = #{registerIp,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       ctime = #{ctime,jdbcType=BIGINT},
-      `status` = #{status,jdbcType=OTHER},
-      latest_login_time = #{latestLoginTime,jdbcType=BIGINT},
-      latest_token_login_time = #{latestTokenLoginTime,jdbcType=BIGINT},
-      latest_login_ip = #{latestLoginIp,jdbcType=VARCHAR},
-      latest_token_login_ip = #{latestTokenLoginIp,jdbcType=VARCHAR}
+      `status` = #{status,jdbcType=OTHER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

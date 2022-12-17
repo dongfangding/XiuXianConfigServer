@@ -12,7 +12,9 @@ import com.ddf.game.xiuxian.api.request.player.RegistryRequest;
 import com.ddf.game.xiuxian.core.application.PlayerApplicationService;
 import com.ddf.game.xiuxian.core.entity.PlayerInfo;
 import com.ddf.game.xiuxian.core.entity.PlayerMetadataConfig;
+import com.ddf.game.xiuxian.core.entity.PlayerProgress;
 import com.ddf.game.xiuxian.core.repository.PlayerConfigRepository;
+import com.ddf.game.xiuxian.core.repository.PlayerProgressRepository;
 import com.ddf.game.xiuxian.core.repository.PlayerRepository;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +37,7 @@ public class PlayerApplicationServiceImpl implements PlayerApplicationService {
     private final PlayerRepository playerRepository;
     private final PlayerConfigRepository playerConfigRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final PlayerProgressRepository playerProgressRepository;
 
 
     @Override
@@ -50,6 +53,11 @@ public class PlayerApplicationServiceImpl implements PlayerApplicationService {
         playerInfo.setCtime(DateUtils.currentTimeSeconds());
         playerInfo.setStatus(PlayerStatusEnum.NORMAL.name());
         playerRepository.insertPlayerInfo(playerInfo);
+
+        // 增加用户进度条时间记录
+        final PlayerProgress progress = new PlayerProgress();
+        progress.setPlayerId(playerInfo.getId());
+        playerProgressRepository.insertPlayerProgress(progress);
     }
 
 
