@@ -8,6 +8,7 @@ import com.ddf.game.xiuxian.api.request.player.PlayerConfigSyncRequest;
 import com.ddf.game.xiuxian.api.request.player.RegistryRequest;
 import com.ddf.game.xiuxian.api.response.player.LoginResponse;
 import com.ddf.game.xiuxian.core.application.PlayerApplicationService;
+import com.ddf.game.xiuxian.core.strategy.login.LoginStrategyContext;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlayerController {
 
     private final PlayerApplicationService playerApplicationService;
+    private final LoginStrategyContext loginStrategyContext;
 
     /**
      * 注册账号
@@ -50,7 +52,7 @@ public class PlayerController {
      */
     @PostMapping("login")
     public ResponseData<LoginResponse> login(@RequestBody @Valid LoginRequest loginRequest) {
-        return ResponseData.success(playerApplicationService.login(loginRequest));
+        return ResponseData.success(loginStrategyContext.login(loginRequest));
     }
 
     /**
@@ -73,6 +75,16 @@ public class PlayerController {
     @GetMapping("getAccountMetadata")
     public ResponseData<String> getAccountMetadata() {
         return ResponseData.success(playerApplicationService.getAccountMetadata(UserContextUtil.getLongUserId()));
+    }
+
+    /**
+     * 心跳
+     *
+     * @return
+     */
+    @PostMapping("heartbeat")
+    public ResponseData<Void> heartbeat() {
+        return ResponseData.empty();
     }
 
 }

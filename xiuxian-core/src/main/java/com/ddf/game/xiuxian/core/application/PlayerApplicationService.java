@@ -1,10 +1,8 @@
 package com.ddf.game.xiuxian.core.application;
 
 import com.ddf.game.xiuxian.api.enume.PlayerConfigCodeEnum;
-import com.ddf.game.xiuxian.api.request.player.LoginRequest;
 import com.ddf.game.xiuxian.api.request.player.PlayerConfigSyncRequest;
 import com.ddf.game.xiuxian.api.request.player.RegistryRequest;
-import com.ddf.game.xiuxian.api.response.player.LoginResponse;
 
 /**
  * <p>玩家</p >
@@ -22,13 +20,6 @@ public interface PlayerApplicationService {
      */
     void registry(RegistryRequest request);
 
-    /**
-     * 登录
-     *
-     * @param loginRequest
-     * @return
-     */
-    LoginResponse login(LoginRequest loginRequest);
 
     /**
      * 玩家配置同步

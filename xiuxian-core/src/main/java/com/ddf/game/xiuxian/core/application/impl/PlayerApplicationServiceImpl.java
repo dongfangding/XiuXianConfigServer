@@ -1,20 +1,14 @@
 package com.ddf.game.xiuxian.core.application.impl;
 
 import com.ddf.boot.common.api.util.DateUtils;
-import com.ddf.boot.common.authentication.model.AuthenticateToken;
-import com.ddf.boot.common.authentication.model.UserClaim;
-import com.ddf.boot.common.authentication.util.TokenUtil;
 import com.ddf.boot.common.core.encode.BCryptPasswordEncoder;
-import com.ddf.boot.common.core.util.ObjectUtil;
 import com.ddf.boot.common.core.util.PreconditionUtil;
 import com.ddf.boot.common.core.util.WebUtil;
 import com.ddf.game.xiuxian.api.enume.PlayerConfigCodeEnum;
 import com.ddf.game.xiuxian.api.enume.PlayerStatusEnum;
 import com.ddf.game.xiuxian.api.enume.XiuXianExceptionCode;
-import com.ddf.game.xiuxian.api.request.player.LoginRequest;
 import com.ddf.game.xiuxian.api.request.player.PlayerConfigSyncRequest;
 import com.ddf.game.xiuxian.api.request.player.RegistryRequest;
-import com.ddf.game.xiuxian.api.response.player.LoginResponse;
 import com.ddf.game.xiuxian.core.application.PlayerApplicationService;
 import com.ddf.game.xiuxian.core.entity.PlayerInfo;
 import com.ddf.game.xiuxian.core.entity.PlayerMetadataConfig;
@@ -58,31 +52,6 @@ public class PlayerApplicationServiceImpl implements PlayerApplicationService {
         playerRepository.insertPlayerInfo(playerInfo);
     }
 
-    @Override
-    public LoginResponse login(LoginRequest loginRequest) {
-        final String nickname = loginRequest.getLoginIdentity();
-        final PlayerInfo playerInfo = playerRepository.getByAccountName(nickname);
-        PreconditionUtil.checkArgument(Objects.nonNull(playerInfo), XiuXianExceptionCode.ACCOUNT_NOT_EXISTS);
-
-        String password = loginRequest.getCredential();
-        final boolean matches = bCryptPasswordEncoder.matches(password, playerInfo.getPassword());
-        PreconditionUtil.checkArgument(matches, XiuXianExceptionCode.PASSWORD_ERROR);
-
-
-        final UserClaim userClaim = new UserClaim();
-        userClaim.setUserId(playerInfo.getId().toString());
-        userClaim.setUsername(nickname);
-        userClaim.setCredit(WebUtil.getUserAgent());
-
-        final PlayerMetadataConfig metadataConfig = playerConfigRepository.getConfig(
-                playerInfo.getId(), PlayerConfigCodeEnum.ACCOUNT_METADATA);
-        final AuthenticateToken authenticateToken = TokenUtil.createToken(userClaim);
-        return LoginResponse.builder()
-                .playerId(playerInfo.getId())
-                .token(authenticateToken.getToken())
-                .accountMetadata(Objects.nonNull(metadataConfig) ? metadataConfig.getConfigValue() : "")
-                .build();
-    }
 
     @Override
     public boolean playerConfigSyncRequest(Long playerId, PlayerConfigCodeEnum configCodeEnum,

@@ -1,5 +1,7 @@
 package com.ddf.game.xiuxian.api.enume;
 
+import java.util.Objects;
+
 /**
  * <p>登录类型</p >
  *
@@ -18,4 +20,15 @@ public enum LoginTypeEnum {
      * TOKEN登录
      */
     TOKEN
+
+    ;
+
+    /**
+     * 当前登录方式是否需要生成token
+     *
+     * @return
+     */
+    public boolean shouldCreateToken() {
+        return Objects.equals(this, TOKEN);
+    }
 }
