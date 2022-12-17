@@ -29,6 +29,6 @@ public enum LoginTypeEnum {
      * @return
      */
     public boolean shouldCreateToken() {
-        return Objects.equals(this, TOKEN);
+        return !Objects.equals(this, TOKEN);
     }
 }
