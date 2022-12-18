@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.game.xiuxian.core.mapper.CdKeyHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.ddf.game.xiuxian.core.entity.CdKeyHistory">
+    <!--@mbg.generated-->
+    <!--@Table cd_key_history-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="player_id" jdbcType="BIGINT" property="playerId" />
+    <result column="cd_key" jdbcType="VARCHAR" property="cdKey" />
+    <result column="cd_key_type" jdbcType="OTHER" property="cdKeyType" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, player_id, cd_key, cd_key_type, ctime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from cd_key_history
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from cd_key_history
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ddf.game.xiuxian.core.entity.CdKeyHistory" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into cd_key_history (player_id, cd_key, cd_key_type, 
+      ctime)
+    values (#{playerId,jdbcType=BIGINT}, #{cdKey,jdbcType=VARCHAR}, #{cdKeyType,jdbcType=OTHER}, 
+      #{ctime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ddf.game.xiuxian.core.entity.CdKeyHistory" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into cd_key_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="playerId != null">
+        player_id,
+      </if>
+      <if test="cdKey != null and cdKey != ''">
+        cd_key,
+      </if>
+      <if test="cdKeyType != null">
+        cd_key_type,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="playerId != null">
+        #{playerId,jdbcType=BIGINT},
+      </if>
+      <if test="cdKey != null and cdKey != ''">
+        #{cdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="cdKeyType != null">
+        #{cdKeyType,jdbcType=OTHER},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddf.game.xiuxian.core.entity.CdKeyHistory">
+    <!--@mbg.generated-->
+    update cd_key_history
+    <set>
+      <if test="playerId != null">
+        player_id = #{playerId,jdbcType=BIGINT},
+      </if>
+      <if test="cdKey != null and cdKey != ''">
+        cd_key = #{cdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="cdKeyType != null">
+        cd_key_type = #{cdKeyType,jdbcType=OTHER},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddf.game.xiuxian.core.entity.CdKeyHistory">
+    <!--@mbg.generated-->
+    update cd_key_history
+    set player_id = #{playerId,jdbcType=BIGINT},
+      cd_key = #{cdKey,jdbcType=VARCHAR},
+      cd_key_type = #{cdKeyType,jdbcType=OTHER},
+      ctime = #{ctime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

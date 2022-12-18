@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddf.game.xiuxian.core.mapper.CdKeyConfigMapper">
+  <resultMap id="BaseResultMap" type="com.ddf.game.xiuxian.core.entity.CdKeyConfig">
+    <!--@mbg.generated-->
+    <!--@Table cd_key_config-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cd_key" jdbcType="VARCHAR" property="cdKey" />
+    <result column="cd_key_type" jdbcType="OTHER" property="cdKeyType" />
+    <result column="expired_time" jdbcType="BIGINT" property="expiredTime" />
+    <result column="cd_key_value" jdbcType="VARCHAR" property="cdKeyValue" />
+    <result column="used_flag" jdbcType="BIT" property="usedFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, cd_key, cd_key_type, expired_time, cd_key_value, used_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from cd_key_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from cd_key_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ddf.game.xiuxian.core.entity.CdKeyConfig" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into cd_key_config (cd_key, cd_key_type, expired_time, 
+      cd_key_value, used_flag)
+    values (#{cdKey,jdbcType=VARCHAR}, #{cdKeyType,jdbcType=OTHER}, #{expiredTime,jdbcType=BIGINT}, 
+      #{cdKeyValue,jdbcType=VARCHAR}, #{usedFlag,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ddf.game.xiuxian.core.entity.CdKeyConfig" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into cd_key_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cdKey != null and cdKey != ''">
+        cd_key,
+      </if>
+      <if test="cdKeyType != null">
+        cd_key_type,
+      </if>
+      <if test="expiredTime != null">
+        expired_time,
+      </if>
+      <if test="cdKeyValue != null and cdKeyValue != ''">
+        cd_key_value,
+      </if>
+      <if test="usedFlag != null">
+        used_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cdKey != null and cdKey != ''">
+        #{cdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="cdKeyType != null">
+        #{cdKeyType,jdbcType=OTHER},
+      </if>
+      <if test="expiredTime != null">
+        #{expiredTime,jdbcType=BIGINT},
+      </if>
+      <if test="cdKeyValue != null and cdKeyValue != ''">
+        #{cdKeyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="usedFlag != null">
+        #{usedFlag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ddf.game.xiuxian.core.entity.CdKeyConfig">
+    <!--@mbg.generated-->
+    update cd_key_config
+    <set>
+      <if test="cdKey != null and cdKey != ''">
+        cd_key = #{cdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="cdKeyType != null">
+        cd_key_type = #{cdKeyType,jdbcType=OTHER},
+      </if>
+      <if test="expiredTime != null">
+        expired_time = #{expiredTime,jdbcType=BIGINT},
+      </if>
+      <if test="cdKeyValue != null and cdKeyValue != ''">
+        cd_key_value = #{cdKeyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="usedFlag != null">
+        used_flag = #{usedFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ddf.game.xiuxian.core.entity.CdKeyConfig">
+    <!--@mbg.generated-->
+    update cd_key_config
+    set cd_key = #{cdKey,jdbcType=VARCHAR},
+      cd_key_type = #{cdKeyType,jdbcType=OTHER},
+      expired_time = #{expiredTime,jdbcType=BIGINT},
+      cd_key_value = #{cdKeyValue,jdbcType=VARCHAR},
+      used_flag = #{usedFlag,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

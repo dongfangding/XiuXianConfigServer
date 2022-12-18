@@ -1,5 +1,6 @@
 package com.ddf.game.xiuxian.core.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ddf.game.xiuxian.core.entity.PlayerInfo;
 
 /**
@@ -9,7 +10,7 @@ import com.ddf.game.xiuxian.core.entity.PlayerInfo;
  * @version 1.0
  * @date 2022/12/17 23:04
  */
-public interface PlayerInfoMapper {
+public interface PlayerInfoMapper extends BaseMapper<PlayerInfo> {
     int deleteByPrimaryKey(Long id);
 
     int insert(PlayerInfo record);

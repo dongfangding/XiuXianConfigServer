@@ -1,6 +1,7 @@
 package com.ddf.game.xiuxian.api.event;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,49 @@ import lombok.NoArgsConstructor;
 public class PlayerLoginEventPayload implements Serializable {
     private static final long serialVersionUID = 1516322558409231083L;
 
+    /**
+     * 玩家id
+     */
+    private Long playerId;
 
+    /**
+     * 登录方式
+     */
+    private String loginType;
+
+    /**
+     * 登录Ip
+     */
+    private String loginIp;
+
+    /**
+     * 登录时间
+     */
+    private Long loginTime;
+
+    /**
+     * 设备号
+     */
+    private String imei;
+
+    /**
+     * 系统
+     */
+    private String os;
+
+    /**
+     * 经度
+     */
+    private BigDecimal longitude;
+
+    /**
+     * 纬度
+     */
+    private BigDecimal latitude;
+
+    /**
+     * 版本号
+     */
+    private Integer version;
 
 }

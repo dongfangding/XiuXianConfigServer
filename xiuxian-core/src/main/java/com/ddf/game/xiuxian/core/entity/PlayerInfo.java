@@ -47,7 +47,7 @@ public class PlayerInfo implements Serializable {
     /**
      * 用户状态
      */
-    private Object status;
+    private String status;
 
     private static final long serialVersionUID = 1L;
 }

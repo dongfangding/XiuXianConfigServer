@@ -19,6 +19,10 @@ public enum XiuXianExceptionCode implements BaseCallbackCode {
     ACCOUNT_NOT_EXISTS("ACCOUNT_NOT_EXISTS", "账号不存在"),
     LOGIN_STRATEGY_MAPPING_ERROR("LOGIN_STRATEGY_MAPPING_ERROR", "登录策略异常~", "服务器开小差了~"),
     IDENTITY_MISMATCH("IDENTITY_MISMATCH", "身份不匹配~"),
+    CD_KEY_ERROR("CD_KEY_ERROR", "兑换码无效~"),
+    CD_KEY_EXPIRED("CD_KEY_EXPIRED", "兑换码已失效~"),
+    CD_KEY_USED("CD_KEY_USED", "兑换码已被使用~"),
+    CD_KEY_REPEAT_DRAW("CD_KEY_REPEAT_DRAW", "兑换码只能领取一次~"),
     ;
 
     private final String code;
