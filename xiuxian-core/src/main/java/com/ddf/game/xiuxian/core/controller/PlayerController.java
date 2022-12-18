@@ -7,6 +7,7 @@ import com.ddf.game.xiuxian.api.request.player.LoginRequest;
 import com.ddf.game.xiuxian.api.request.player.PlayerConfigSyncRequest;
 import com.ddf.game.xiuxian.api.request.player.RegistryRequest;
 import com.ddf.game.xiuxian.api.response.player.LoginResponse;
+import com.ddf.game.xiuxian.api.response.player.PlayerProgressResponse;
 import com.ddf.game.xiuxian.core.application.PlayerApplicationService;
 import com.ddf.game.xiuxian.core.strategy.login.LoginStrategyContext;
 import javax.validation.Valid;
@@ -87,4 +88,14 @@ public class PlayerController {
         return ResponseData.empty();
     }
 
+
+    /**
+     * 玩家进度
+     *
+     * @return
+     */
+    @GetMapping("playerProgress")
+    public ResponseData<PlayerProgressResponse> playerProgress() {
+        return ResponseData.success(playerApplicationService.playerProgress(UserContextUtil.getLongUserId()));
+    }
 }

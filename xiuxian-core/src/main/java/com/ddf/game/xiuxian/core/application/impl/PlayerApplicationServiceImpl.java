@@ -9,13 +9,16 @@ import com.ddf.game.xiuxian.api.enume.PlayerStatusEnum;
 import com.ddf.game.xiuxian.api.enume.XiuXianExceptionCode;
 import com.ddf.game.xiuxian.api.request.player.PlayerConfigSyncRequest;
 import com.ddf.game.xiuxian.api.request.player.RegistryRequest;
+import com.ddf.game.xiuxian.api.response.player.PlayerProgressResponse;
 import com.ddf.game.xiuxian.core.application.PlayerApplicationService;
 import com.ddf.game.xiuxian.core.entity.PlayerInfo;
 import com.ddf.game.xiuxian.core.entity.PlayerMetadataConfig;
 import com.ddf.game.xiuxian.core.entity.PlayerProgress;
+import com.ddf.game.xiuxian.core.entity.SysNotice;
 import com.ddf.game.xiuxian.core.repository.PlayerConfigRepository;
 import com.ddf.game.xiuxian.core.repository.PlayerProgressRepository;
 import com.ddf.game.xiuxian.core.repository.PlayerRepository;
+import com.ddf.game.xiuxian.core.repository.SysNoticeRepository;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +41,7 @@ public class PlayerApplicationServiceImpl implements PlayerApplicationService {
     private final PlayerConfigRepository playerConfigRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final PlayerProgressRepository playerProgressRepository;
-
+    private final SysNoticeRepository sysNoticeRepository;
 
     @Override
     public void registry(RegistryRequest request) {
@@ -76,5 +79,21 @@ public class PlayerApplicationServiceImpl implements PlayerApplicationService {
         final PlayerMetadataConfig metadataConfig = playerConfigRepository.getConfig(
                 playerId, PlayerConfigCodeEnum.ACCOUNT_METADATA);
         return Objects.nonNull(metadataConfig) ? metadataConfig.getConfigValue() : "";
+    }
+
+    @Override
+    public PlayerProgressResponse playerProgress(Long playerId) {
+        final PlayerProgress progress = playerProgressRepository.getPlayerProgress(playerId);
+        Long latestReadNoticeTime = 0L;
+        if (Objects.nonNull(progress)) {
+            latestReadNoticeTime = progress.getLatestReadNoticeTime();
+        }
+
+        // 获取最新一条公告信息
+        final SysNotice notice = sysNoticeRepository.latestSysNotice();
+
+        return PlayerProgressResponse.builder()
+                .newNotice(Objects.nonNull(notice) && notice.getEffectiveTime() > latestReadNoticeTime)
+                .build();
     }
 }

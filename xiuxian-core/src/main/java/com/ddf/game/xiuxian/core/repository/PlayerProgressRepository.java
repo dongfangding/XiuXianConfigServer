@@ -1,5 +1,7 @@
 package com.ddf.game.xiuxian.core.repository;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.ddf.game.xiuxian.core.entity.PlayerProgress;
 import com.ddf.game.xiuxian.core.mapper.PlayerProgressMapper;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +31,17 @@ public class PlayerProgressRepository {
      */
     public int insertPlayerProgress(PlayerProgress playerProgress) {
         return playerProgressMapper.insertSelective(playerProgress);
+    }
+
+    /**
+     * 获取玩家进度
+     *
+     * @param playerId
+     * @return
+     */
+    public PlayerProgress getPlayerProgress(Long playerId) {
+        final LambdaQueryWrapper<PlayerProgress> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(PlayerProgress::getPlayerId, playerId);
+        return playerProgressMapper.selectOne(wrapper);
     }
 }

@@ -1,5 +1,6 @@
 package com.ddf.game.xiuxian.core.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ddf.game.xiuxian.core.entity.PlayerProgress;
 
 /**
@@ -9,7 +10,7 @@ import com.ddf.game.xiuxian.core.entity.PlayerProgress;
 * @version 1.0
 * @date 2022/12/17 23:04
 */
-public interface PlayerProgressMapper {
+public interface PlayerProgressMapper extends BaseMapper<PlayerProgress> {
     int deleteByPrimaryKey(Long id);
 
     int insert(PlayerProgress record);

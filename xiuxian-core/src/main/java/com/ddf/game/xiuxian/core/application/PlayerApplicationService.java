@@ -3,6 +3,7 @@ package com.ddf.game.xiuxian.core.application;
 import com.ddf.game.xiuxian.api.enume.PlayerConfigCodeEnum;
 import com.ddf.game.xiuxian.api.request.player.PlayerConfigSyncRequest;
 import com.ddf.game.xiuxian.api.request.player.RegistryRequest;
+import com.ddf.game.xiuxian.api.response.player.PlayerProgressResponse;
 
 /**
  * <p>玩家</p >
@@ -39,4 +40,13 @@ public interface PlayerApplicationService {
      * @return
      */
     String getAccountMetadata(Long playerId);
+
+    /**
+     * 玩家进度查询
+     *
+     * @param playerId
+     * @return
+     */
+    PlayerProgressResponse playerProgress(Long playerId);
+
 }
