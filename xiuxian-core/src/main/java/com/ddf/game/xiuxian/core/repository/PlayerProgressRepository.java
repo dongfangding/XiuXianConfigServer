@@ -1,7 +1,9 @@
 package com.ddf.game.xiuxian.core.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.ddf.boot.common.api.util.DateUtils;
 import com.ddf.game.xiuxian.core.entity.PlayerProgress;
 import com.ddf.game.xiuxian.core.mapper.PlayerProgressMapper;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +45,18 @@ public class PlayerProgressRepository {
         final LambdaQueryWrapper<PlayerProgress> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(PlayerProgress::getPlayerId, playerId);
         return playerProgressMapper.selectOne(wrapper);
+    }
+
+    /**
+     * 更新玩家最后读公告时间
+     *
+     * @param playerId
+     * @return
+     */
+    public boolean updateLatestReadNoticeTime(Long playerId) {
+        final LambdaUpdateWrapper<PlayerProgress> wrapper = Wrappers.lambdaUpdate();
+        wrapper.eq(PlayerProgress::getPlayerId, playerId);
+        wrapper.set(PlayerProgress::getLatestReadNoticeTime, DateUtils.currentTimeSeconds());
+        return playerProgressMapper.update(null, wrapper) > 0;
     }
 }

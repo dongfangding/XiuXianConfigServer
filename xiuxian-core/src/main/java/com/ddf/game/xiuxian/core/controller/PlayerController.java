@@ -5,10 +5,12 @@ import com.ddf.boot.common.authentication.util.UserContextUtil;
 import com.ddf.game.xiuxian.api.enume.PlayerConfigCodeEnum;
 import com.ddf.game.xiuxian.api.request.player.LoginRequest;
 import com.ddf.game.xiuxian.api.request.player.PlayerConfigSyncRequest;
+import com.ddf.game.xiuxian.api.request.player.PlayerProgressSyncRequest;
 import com.ddf.game.xiuxian.api.request.player.RegistryRequest;
 import com.ddf.game.xiuxian.api.response.player.LoginResponse;
 import com.ddf.game.xiuxian.api.response.player.PlayerProgressResponse;
 import com.ddf.game.xiuxian.core.application.PlayerApplicationService;
+import com.ddf.game.xiuxian.core.application.PlayerProgressApplication;
 import com.ddf.game.xiuxian.core.strategy.login.LoginStrategyContext;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class PlayerController {
 
     private final PlayerApplicationService playerApplicationService;
     private final LoginStrategyContext loginStrategyContext;
+    private final PlayerProgressApplication playerProgressApplication;
 
     /**
      * 注册账号
@@ -97,5 +100,15 @@ public class PlayerController {
     @GetMapping("playerProgress")
     public ResponseData<PlayerProgressResponse> playerProgress() {
         return ResponseData.success(playerApplicationService.playerProgress(UserContextUtil.getLongUserId()));
+    }
+
+    /**
+     * 玩家进度同步
+     *
+     * @return
+     */
+    @PostMapping("playerProgress/sync")
+    public ResponseData<Boolean> playerProgressSync(@RequestBody @Valid PlayerProgressSyncRequest request) {
+        return ResponseData.success(playerProgressApplication.sync(UserContextUtil.getLongUserId(), request));
     }
 }

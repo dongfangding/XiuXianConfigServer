@@ -13,8 +13,7 @@ POST http://123.60.190.86/xiuXian/player/login
 Content-Type: application/json
 
 {
-  "loginType": "PASSWORD",
-  "loginIdentity": "dingchen",
+  "loginIdentity": "dingchen4",
   "credential": "E10ADC3949BA59ABBE56E057F20F883E"
 }
 
@@ -50,11 +49,29 @@ GET http://123.60.190.86/xiuXian/player/playerProgress
 Content-Type: application/json
 Authorization: Bearer $2a$10$hbsaGaUKqpV4wgz0nT7e7e6J/nRVXnNdzDbLc6eocB.USTRIn/Tjy<=>efe83ec743690a1c463c6b551bbe0d09b589111380397a7a4341bbe76aba8eda103ee09daf1cc5b36c1b73060c233ed965b9ffac0588a0100576e049dad1e2c06a5978f56516c3cba388059467b6a845e7a0d2358413ae7885a124d9d299bb7a69366fefdd6a700631e87d0630ae780914cf3eb09a525aad069a78e92a2f8665592813d4fb155ee59c329f137787b7242b77eaf474151a8546d20558cd20aa4ea2f6a9d64ebd5c377f7f4c2ba98d7454
 
+### 玩家进度条同步
+GET http://123.60.190.86/xiuXian/player/playerProgress/sync
+Content-Type: application/json
+Authorization: Bearer $2a$10$hbsaGaUKqpV4wgz0nT7e7e6J/nRVXnNdzDbLc6eocB.USTRIn/Tjy<=>efe83ec743690a1c463c6b551bbe0d09b589111380397a7a4341bbe76aba8eda103ee09daf1cc5b36c1b73060c233ed965b9ffac0588a0100576e049dad1e2c06a5978f56516c3cba388059467b6a845e7a0d2358413ae7885a124d9d299bb7a69366fefdd6a700631e87d0630ae780914cf3eb09a525aad069a78e92a2f8665592813d4fb155ee59c329f137787b7242b77eaf474151a8546d20558cd20aa4ea2f6a9d64ebd5c377f7f4c2ba98d7454
+
+{
+  "progressType": "SYS_NOTICE"
+}
 
 ### 最新公告查询
 GET http://123.60.190.86/xiuXian/sysNotice/latestSysNotice
 Content-Type: application/json
 Authorization: Bearer $2a$10$hbsaGaUKqpV4wgz0nT7e7e6J/nRVXnNdzDbLc6eocB.USTRIn/Tjy<=>efe83ec743690a1c463c6b551bbe0d09b589111380397a7a4341bbe76aba8eda103ee09daf1cc5b36c1b73060c233ed965b9ffac0588a0100576e049dad1e2c06a5978f56516c3cba388059467b6a845e7a0d2358413ae7885a124d9d299bb7a69366fefdd6a700631e87d0630ae780914cf3eb09a525aad069a78e92a2f8665592813d4fb155ee59c329f137787b7242b77eaf474151a8546d20558cd20aa4ea2f6a9d64ebd5c377f7f4c2ba98d7454
+
+
+
+
+### 心跳
+POST http://123.60.190.86/xiuXian/player/heartbeat
+Content-Type: application/json
+Authorization: Bearer $2a$10$hbsaGaUKqpV4wgz0nT7e7e6J/nRVXnNdzDbLc6eocB.USTRIn/Tjy<=>efe83ec743690a1c463c6b551bbe0d09b589111380397a7a4341bbe76aba8eda103ee09daf1cc5b36c1b73060c233ed965b9ffac0588a0100576e049dad1e2c06a5978f56516c3cba388059467b6a845e7a0d2358413ae7885a124d9d299bb7a69366fefdd6a700631e87d0630ae780914cf3eb09a525aad069a78e92a2f8665592813d4fb155ee59c329f137787b7242b77eaf474151a8546d20558cd20aa4ea2f6a9d64ebd5c377f7f4c2ba98d7454
+
+{}
 
 
 
