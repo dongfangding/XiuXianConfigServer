@@ -1,6 +1,7 @@
 package com.ddf.game.xiuxian.core;
 
 import com.ddf.boot.common.authentication.annotation.EnableAuthenticate;
+import com.ddf.boot.common.core.logaccess.EnableLogAspect;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan("com.ddf.game.xiuxian.core.mapper")
 @EnableAuthenticate
+@EnableLogAspect
 public class Application {
 
     public static void main(String[] args) {

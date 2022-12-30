@@ -18,6 +18,11 @@ public interface RedisKey {
     String CD_KEY = "xiu_xian:cd_key:%s";
 
     /**
+     * 广告点击次数统计
+     */
+    String AD_CLICK_TIMES = "statistics:ad_click_times";
+
+    /**
      * 获取cd key的key
      *
      * @param cdKeyEnum

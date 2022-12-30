@@ -58,5 +58,6 @@ customs:
     ignores:
       - /player/registry
       - /player/login
+      - /statistics/adClick
     expired-minute: 10080
 
