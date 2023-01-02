@@ -29,6 +29,6 @@ public class StatisticsController {
      */
     @PostMapping("adClick")
     public void adClick() {
-        statisticsRepository.increaseAdClickTimes(UserContextUtil.getRequestHeader().getImei());
+        statisticsRepository.increaseAdClickTimes(UserContextUtil.getRequestContext().getImei());
     }
 }
