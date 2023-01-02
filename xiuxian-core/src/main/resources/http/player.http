@@ -9,7 +9,7 @@ Content-Type: application/json
 
 
 ### 登录
-POST http://123.60.190.86/xiuXian/player/login
+POST http://localhost:8081/xiuXian/player/login
 Content-Type: application/json
 os: PC
 imei: fwefewfwefwefwefw

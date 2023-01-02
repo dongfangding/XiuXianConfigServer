@@ -8,9 +8,9 @@ echo "8080的流量摘除完毕, 执行应用重启命令"
 supervisorctl restart xiuxian
 #sleep 5
 times=1
-while(( $times <= 20 ))
+while(( times <= 20 ))
 do
-	pid=`/usr/sbin/lsof -i :8080|grep -v "PID" | awk '{print $2}'`
+	pid=$(/usr/sbin/lsof -i :8080|grep -v "PID" | awk '{print $2}')
 	if [ "$pid" != "" ];
 	then
 		 echo "8080服务启动完成"
@@ -18,7 +18,7 @@ do
     else
     	echo "8080服务正在启动~"
     fi
-	let "times++"
+	(( times++ ))
 	sleep 5
 done
 
@@ -34,9 +34,9 @@ echo "8081的流量摘除完毕, 执行应用重启命令"
 supervisorctl restart xiuxian1
 #sleep 5
 times=1
-while(( $times <= 20 ))
+while(( times <= 20 ))
 do
-        pid=`/usr/sbin/lsof -i :8081|grep -v "PID" | awk '{print $2}'`
+  pid=$(/usr/sbin/lsof -i :8081|grep -v "PID" | awk '{print $2}')
 	if [ "$pid" != "" ];
 	then
 		 echo "8081服务启动完成"
@@ -44,7 +44,7 @@ do
     else
     	echo "8081服务正在启动~"
     fi
-	let "times++"
+	(( times++ ))
 	sleep 5
 done
 

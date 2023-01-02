@@ -1,16 +1,21 @@
 package com.ddf.game.xiuxian.core.strategy.login;
 
 import cn.hutool.core.collection.CollUtil;
+import com.ddf.boot.common.api.model.common.RequestContext;
+import com.ddf.boot.common.api.util.DateUtils;
 import com.ddf.boot.common.authentication.model.AuthenticateToken;
 import com.ddf.boot.common.authentication.model.UserClaim;
 import com.ddf.boot.common.authentication.util.TokenUtil;
+import com.ddf.boot.common.authentication.util.UserContextUtil;
 import com.ddf.boot.common.core.util.PreconditionUtil;
 import com.ddf.boot.common.core.util.WebUtil;
 import com.ddf.game.xiuxian.api.enume.LoginTypeEnum;
 import com.ddf.game.xiuxian.api.enume.PlayerConfigCodeEnum;
 import com.ddf.game.xiuxian.api.enume.XiuXianExceptionCode;
+import com.ddf.game.xiuxian.api.event.PlayerLoginEventPayload;
 import com.ddf.game.xiuxian.api.request.player.LoginRequest;
 import com.ddf.game.xiuxian.api.response.player.LoginResponse;
+import com.ddf.game.xiuxian.core.application.event.PlayerLoginEvent;
 import com.ddf.game.xiuxian.core.entity.PlayerInfo;
 import com.ddf.game.xiuxian.core.entity.PlayerMetadataConfig;
 import com.ddf.game.xiuxian.core.repository.PlayerConfigRepository;
@@ -24,6 +29,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 /**
@@ -40,8 +46,8 @@ public class LoginStrategyContext implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
     private final PlayerConfigRepository playerConfigRepository;
-
-    private Map<LoginTypeEnum, LoginStrategy> loginStrategyMap = new HashMap<>();
+    private final Map<LoginTypeEnum, LoginStrategy> loginStrategyMap = new HashMap<>();
+    private final ApplicationEventPublisher applicationEventPublisher;
 
 
     @PostConstruct
@@ -78,6 +84,19 @@ public class LoginStrategyContext implements ApplicationContextAware {
             final AuthenticateToken authenticateToken = TokenUtil.createToken(userClaim);
             token = authenticateToken.getToken();
         }
+        // 发布登录事件
+        final RequestContext requestContext = UserContextUtil.getRequestContext();
+        final PlayerLoginEventPayload playerLoginEventPayload = new PlayerLoginEventPayload();
+        playerLoginEventPayload.setPlayerId(playerInfo.getId());
+        playerLoginEventPayload.setLoginType(loginType.name());
+        playerLoginEventPayload.setLoginIp(requestContext.getClientIp());
+        playerLoginEventPayload.setLoginTime(DateUtils.currentTimeSeconds());
+        playerLoginEventPayload.setImei(requestContext.getImei());
+        playerLoginEventPayload.setOs(requestContext.getOs().name());
+        playerLoginEventPayload.setLongitude(requestContext.getLongitude());
+        playerLoginEventPayload.setLatitude(requestContext.getLatitude());
+        playerLoginEventPayload.setVersion(requestContext.getVersion());
+        applicationEventPublisher.publishEvent(new PlayerLoginEvent(this, playerLoginEventPayload));
 
         final PlayerMetadataConfig metadataConfig = playerConfigRepository.getConfig(
                 playerInfo.getId(), PlayerConfigCodeEnum.ACCOUNT_METADATA);
