@@ -5,9 +5,9 @@ spring:
       url: jdbc:mysql://${mysql_host}:${mysql_port}/${mysql_db}?useUnicode=true&characterEncoding=UTF8&useSSL=false&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&tinyInt1isBit=false
       username: ${mysql_username}
       password: ${mysql_password}
-      initial-size: 5
+      initial-size: 10
       asyncInit: true
-      max-active: 100
+      max-active: 200
       min-idle: 10
       keep-alive: true
       max-wait: 60000
@@ -15,13 +15,16 @@ spring:
       # 回收连接相关
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 600000
-      validation-query: SELECT 1
+      validation-query: SELECT x
+      # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
       test-while-idle: true
+      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
       test-on-borrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
       test-on-return: false
       use-ping-method: false
       poolPreparedStatements: false
-      max-open-prepared-statements: 20
+      max-open-prepared-statements: 100
       filter:
         stat:
           enabled: true
