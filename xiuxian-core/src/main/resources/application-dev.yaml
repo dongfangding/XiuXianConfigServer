@@ -15,7 +15,7 @@ spring:
       # 回收连接相关
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 600000
-      validation-query: SELECT x
+      validation-query: SELECT 1
       # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
       test-while-idle: true
       # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
@@ -47,16 +47,13 @@ spring:
     basename: exception/exception
     use-code-as-default-message: false
 
-  # 使用RedisProperties初始化redisson客户端
   redis:
     host: ${redis_host}
     port: ${redis_port}
     database: ${redis_database}
-    timeout: 3000ms
     password: ${redis_password}
     redisson:
-      # com.ddf.boot.common.redis.config.RedisCustomizeAutoConfiguration
-      codec: org.redisson.codec.JsonJacksonCodec
+      file: classpath:redisson.yml
 
 customs: # 自定义的属性最好都写在custom前缀下，方便辨认
   global-properties:
