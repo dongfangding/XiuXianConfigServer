@@ -17,6 +17,7 @@ public enum XiuXianExceptionCode implements BaseCallbackCode {
     ACCOUNT_EXISTS("ACCOUNT_EXISTS", "账号已存在"),
     PASSWORD_ERROR("PASSWORD_ERROR", "密码错误"),
     ACCOUNT_NOT_EXISTS("ACCOUNT_NOT_EXISTS", "账号不存在"),
+    ACCOUNT_IN_BLACK("ACCOUNT_IN_BLACK", "账号已被封禁"),
     LOGIN_STRATEGY_MAPPING_ERROR("LOGIN_STRATEGY_MAPPING_ERROR", "登录策略异常~", "服务器开小差了~"),
     IDENTITY_MISMATCH("IDENTITY_MISMATCH", "身份不匹配~"),
     CD_KEY_ERROR("CD_KEY_ERROR", "兑换码无效~"),
